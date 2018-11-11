@@ -1,6 +1,22 @@
 {
-  "name": "route-mapper",
+  "name": "route-mapping",
   "version": "0.0.1",
+  "author": "Elden S. Park",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/node-starter-kit/route-mapping.git"
+  },
+  "scripts": {
+    "build": "./node_modules/.bin/gulp --gulpfile ./internals/gulp/gulpfile.js build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "./node_modules/.bin/gulp --gulpfile ./internals/gulp/gulpfile.js tsc"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@types/express": "^4.16.0",
+    "typescript": "^3.1.6"
+  },
   "description": "",
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -22,17 +38,5 @@
     "gulp-babel": "^8.0.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-typescript": "^5.0.0-alpha.3"
-  },
-  "main": "lib/index.js",
-  "scripts": {
-    "build": "./node_modules/.bin/gulp --gulpfile ./internals/gulp/gulpfile.js build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "./node_modules/.bin/gulp --gulpfile ./internals/gulp/gulpfile.js tsc"
-  },
-  "author": "Elden S. Park",
-  "license": "ISC",
-  "dependencies": {
-    "@types/express": "^4.16.0",
-    "typescript": "^3.1.6"
   }
 }
