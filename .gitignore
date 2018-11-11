@@ -165,6 +165,7 @@ tsc_out/
 dist/
 /src/config/marmoym-config
 .vscode/
+lib/
 
 # ...
 __temp/
