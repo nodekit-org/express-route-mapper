@@ -1,11 +1,11 @@
 {
-  "name": "route-mapping",
+  "name": "@nodekit/route-mapper",
   "version": "0.0.1",
   "author": "Elden S. Park",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/node-starter-kit/route-mapping.git"
+    "url": "git+https://github.com/nodekit-org/route-mapper.git"
   },
   "scripts": {
     "build": "./node_modules/.bin/gulp --gulpfile ./internals/gulp/gulpfile.js build",
@@ -17,7 +17,6 @@
     "@types/express": "^4.16.0",
     "typescript": "^3.1.6"
   },
-  "description": "",
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
@@ -38,5 +37,13 @@
     "gulp-babel": "^8.0.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-typescript": "^5.0.0-alpha.3"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/nodekit-org/route-mapper/issues"
+  },
+  "homepage": "https://github.com/nodekit-org/route-mapper#readme",
+  "directories": {
+    "lib": "lib"
+  },
+  "description": ""
 }
