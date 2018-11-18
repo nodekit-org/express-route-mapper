@@ -7,19 +7,12 @@ import {
 } from 'express';
 import chalk from 'chalk';
 
-export default function routeMapper<R>(app: Application, routeDefinitions: RouteDefinition<R>[]) {
-  routeDefinitions.map((rmap) => {
-    registerRouter(app, rmap.mapPath, rmap.map, rmap.postAsyncHandlers);
-  });
-  return app;
-};
-
-const registerRouter: RegisterRouter = function (app, mapPath, routeMap, postAsyncHandlers) {
+export const createRouter: CreateRouter = function (routes, postAsyncHandlers) {
   const router: Router = Router();
-  console.log(`[routeMapper] mapPath: ${chalk.green('%s')}, postAsyncHandlers (%s)`, mapPath, postAsyncHandlers.length);
+  console.log(`[routeMapper] postAsyncHandlers (%s), routes (%s)`, postAsyncHandlers.length, routes.length);
 
-  routeMap.map((route) => {
-    console.debug('[routeMapper] Route is registered: [%s] %s', route.method, route.path);
+  routes.map((route) => {
+    console.debug(`[routeMapper] Route is registered: [%s] ${chalk.green('%s')}`, route.method, route.path);
     router[route.method](
       route.path, 
       [
@@ -35,10 +28,11 @@ const registerRouter: RegisterRouter = function (app, mapPath, routeMap, postAsy
       ],
     );
   });
-  app.use(mapPath, router);
-}
 
-export interface Route<R> {
+  return router;
+};
+
+interface Route<R> {
   action: (x: object | null) => Promise<R>;
   beforeware?: Array<(Request, res: Response, next: NextFunction) => void>;
   createParam?: (req: Request) => object;
@@ -46,21 +40,13 @@ export interface Route<R> {
   path: string;
 }
 
-export interface RegisterRouter {
-  <R>(
-    app: Application, 
-    mapPath: string, 
-    routeMap: Route<R>[], 
-    postAsyncHandlers: Array<PostAsyncHandler<R>>,
-  ): void;
-}
-
-export interface RouteDefinition<R> {
-  map: Route<R>[],
-  mapPath: string;
-  postAsyncHandlers: Array<(req: Request, res: Response, next: NextFunction) => (R: R) => R>,
-}
-
 interface PostAsyncHandler<R> {
   (req: Request, res: Response, next: NextFunction): (R: R) => R;
+}
+
+interface CreateRouter {
+  <R>(
+    routes: Route<R>[],
+    postAsyncHandlers: PostAsyncHandler<R>[],
+  ): Router;
 }

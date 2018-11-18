@@ -1,5 +1,5 @@
-import { Application, NextFunction, Request, Response } from 'express';
-export default function routeMapper<R>(app: Application, routeDefinitions: RouteDefinition<R>[]): Application;
+import { Application, NextFunction, Request, Response, Router } from 'express';
+export declare const createRouter: CreateRouter;
 export interface Route<R> {
     action: (x: object | null) => Promise<R>;
     beforeware?: Array<(Request: any, res: Response, next: NextFunction) => void>;
@@ -17,6 +17,9 @@ export interface RouteDefinition<R> {
 }
 interface PostAsyncHandler<R> {
     (req: Request, res: Response, next: NextFunction): (R: R) => R;
+}
+interface CreateRouter {
+    <R>(routes: Route<R>[], postAsyncHandlers: PostAsyncHandler<R>[]): Router;
 }
 export {};
 //# sourceMappingURL=index.d.ts.map
