@@ -9,8 +9,8 @@
   },
   "scripts": {
     "build": "./node_modules/.bin/gulp --gulpfile ./internals/gulp/gulpfile.js build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "./node_modules/.bin/gulp --gulpfile ./internals/gulp/gulpfile.js tsc"
+    "example": "yarn run build && node example/launch.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "main": "lib/index.js",
   "dependencies": {
@@ -30,9 +30,11 @@
     "@babel/plugin-syntax-import-meta": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-typescript": "^7.1.0",
+    "@babel/register": "^7.0.0",
     "babel-plugin-module-resolver": "^3.1.1",
     "chalk": "^2.4.1",
     "del": "^3.0.0",
+    "express": "^4.16.4",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-sourcemaps": "^2.6.4",
