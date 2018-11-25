@@ -7,7 +7,7 @@ import {
 } from 'express';
 import chalk from 'chalk';
 
-const tag = chalk.hex('D1D2FD')('[routeMapper]');
+const tag = chalk.cyan('[routeMapper]');
 
 export const createRouter: CreateRouter = function (routes, postAsyncHandlers) {
   const router: Router = Router();
