@@ -1,6 +1,6 @@
 {
   "name": "@nodekit/express-route-mapper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Elden S. Park",
   "license": "MIT",
   "repository": {
