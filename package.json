@@ -1,11 +1,11 @@
 {
-  "name": "@nodekit/route-mapper",
+  "name": "@nodekit/express-route-mapper",
   "version": "0.0.2",
   "author": "Elden S. Park",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nodekit-org/route-mapper.git"
+    "url": "git+https://github.com/nodekit-org/express-route-mapper.git"
   },
   "scripts": {
     "build": "./node_modules/.bin/gulp --gulpfile ./internals/gulp/gulpfile.js build",
@@ -41,9 +41,9 @@
     "gulp-typescript": "^5.0.0-alpha.3"
   },
   "bugs": {
-    "url": "https://github.com/nodekit-org/route-mapper/issues"
+    "url": "https://github.com/nodekit-org/express-route-mapper/issues"
   },
-  "homepage": "https://github.com/nodekit-org/route-mapper#readme",
+  "homepage": "https://github.com/nodekit-org/express-route-mapper#readme",
   "directories": {
     "lib": "lib"
   },
