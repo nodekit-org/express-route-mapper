@@ -13,9 +13,9 @@ const PORT = 5100;
 
 const app = express();
 
-const routes0: Route<string>[] = [
+const routes0: Route<string, null>[] = [
   {
-    action: () => {
+    action: (a: string) => {
       return Promise.resolve('debug');
     },
     method: 'get',
@@ -23,17 +23,24 @@ const routes0: Route<string>[] = [
   },
 ];
 
-const routes1: Route<string>[] = [
+const routes1: Route<string, Route1Param>[] = [
   {
-      action: () => Promise.resolve('seed'),
-      method: 'get',
-      path: '/seed',
+    action: async (a: Route1Param) => {
+      return 'power';
     },
-    {
-      action: () => Promise.resolve('comment'),
-      method: 'post',
-      path: '/comment',
+    createParam: (req: Request) => {
+      return {
+        foo: 1,
+      };
     },
+    method: 'get',
+    path: '/seed',
+  },
+  {
+    action: () => Promise.resolve('comment'),
+    method: 'post',
+    path: '/comment',
+  },
 ];
 
 function respond(req: Request, res: Response, next: NextFunction) {
@@ -63,3 +70,7 @@ app.listen(PORT, function(err) {
   }
   console.info('Listening at port: %s', PORT);
 });
+
+interface Route1Param {
+  foo: number;
+}

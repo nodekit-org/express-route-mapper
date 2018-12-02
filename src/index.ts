@@ -38,10 +38,10 @@ export const createRouter: CreateRouter = function (routes, postAsyncHandlers) {
   return router;
 };
 
-interface Route<R> {
-  action: (x: object | null) => Promise<R>;
+export interface Route<R, P> {
+  action: (x: P | undefined) => Promise<R>;
   beforeware?: Array<(Request, res: Response, next: NextFunction) => void>;
-  createParam?: (req: Request) => object;
+  createParam?: (req: Request) => P;
   method: 'get' | 'post' | 'put' | 'delete';
   path: string;
 }
@@ -52,7 +52,7 @@ interface PostAsyncHandler<R> {
 
 interface CreateRouter {
   <R>(
-    routes: Route<R>[],
+    routes: Route<R, unknown>[],
     postAsyncHandlers: PostAsyncHandler<R>[],
   ): Router;
 }

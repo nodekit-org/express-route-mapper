@@ -20,7 +20,14 @@ module.exports = {
     "@babel/plugin-proposal-json-strings"
   ],
   "presets": [
-    "@babel/preset-env",
+    [
+      "@babel/preset-env", 
+      {
+        "targets": {
+          "node": "8.11",
+        }
+      }
+    ],
     "@babel/preset-typescript"
   ]
 };
