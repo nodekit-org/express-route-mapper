@@ -38,6 +38,9 @@ export const createRouter: CreateRouter = function (routes, postAsyncHandlers) {
   return router;
 };
 
+/**
+ * P Parameter type
+ */
 export interface Route<R, P> {
   action: (x: P | undefined) => Promise<R>;
   beforeware?: Array<(Request, res: Response, next: NextFunction) => void>;
@@ -51,8 +54,11 @@ interface PostAsyncHandler<R> {
 }
 
 interface CreateRouter {
+  /**
+   * R response type
+   */
   <R>(
-    routes: Route<R, unknown>[],
+    routes: Route<R, any>[],
     postAsyncHandlers: PostAsyncHandler<R>[],
   ): Router;
 }

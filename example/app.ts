@@ -1,8 +1,4 @@
-import express, {
-  Request,
-  Response,
-  NextFunction,
-} from 'express';
+import * as express from 'express';
 
 import { 
   createRouter,
@@ -15,7 +11,7 @@ const app = express();
 
 const routes0: Route<string, null>[] = [
   {
-    action: (a: string) => {
+    action: () => {
       return Promise.resolve('debug');
     },
     method: 'get',
@@ -23,27 +19,33 @@ const routes0: Route<string, null>[] = [
   },
 ];
 
-const routes1: Route<string, Route1Param>[] = [
-  {
-    action: async (a: Route1Param) => {
+
+const routes1: Route<string, any>[] = [
+  <RouteWithParam<{ foo: string }>>{
+    action: async (a: {foo: string }) => {
       return 'power';
     },
-    createParam: (req: Request) => {
+    createParam: (req: express.Request) => {
       return {
-        foo: 1,
+        foo: '1',
       };
     },
     method: 'get',
     path: '/seed',
   },
-  {
-    action: () => Promise.resolve('comment'),
+  <RouteWithParam<string>>{
+    action: async () => {
+      return 'due';
+    },
+    createParam: (req: express.Request) => {
+      return '1';
+    },
     method: 'post',
     path: '/comment',
   },
 ];
 
-function respond(req: Request, res: Response, next: NextFunction) {
+function respond(req: express.Request, res: express.Response, next: express.NextFunction) {
   return function (data) {
     res.status(200)
       .send({
@@ -74,3 +76,5 @@ app.listen(PORT, function(err) {
 interface Route1Param {
   foo: number;
 }
+
+type RouteWithParam<P> = Route<string, P>;

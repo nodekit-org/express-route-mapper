@@ -15,7 +15,6 @@ const util = require('util');
 
 const babelRc = require('./.babelrc');
 const paths = require('../../src/paths');
-const tsConfig = require('./tsconfig');
 
 const buildLog = (tag, ...args) => {
   console.info(chalk.cyan(`[build - ${tag}]`), util.format(...args));
@@ -56,8 +55,8 @@ gulp.task(Task.CLEAN, () => {
 });
 
 gulp.task(Task.TSC, gulp.series(Task.CLEAN, function _tsc(done) {
-  buildLog('tsc config: %o', tsConfig.compilerOptions);
-  const tsProject = ts.createProject(tsConfig.compilerOptions);
+  const tsProject = ts.createProject('tsconfig.json');
+  buildLog(Task.TSC, 'Typescript configuration:\n%o', tsProject.config);
 
   return gulp.src([`${paths.src}/**/*.{ts,tsx}`])
     .pipe(tsProject())
