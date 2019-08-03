@@ -3,22 +3,14 @@
   console.info('Current working directory %s', process.cwd());
 })();
 
-const babel = require('gulp-babel');
-const chalk = require('chalk');
+const { buildLogger } = require('jege/server');
 const del = require('del');
-const fs = require('fs');
 const gulp = require('gulp');
-const path = require('path');
-const sourcemaps = require('gulp-sourcemaps');
 const ts = require('gulp-typescript');
-const util = require('util');
 
-const babelRc = require('./.babelrc');
 const paths = require('../../src/paths');
 
-const buildLog = (tag, ...args) => {
-  console.info(chalk.cyan(`[build - ${tag}]`), util.format(...args));
-};
+const log = buildLogger('[express-route-mapper]');
 
 const Task = {
   BABEL: 'babel',
@@ -47,7 +39,7 @@ const Task = {
 // });
 
 gulp.task(Task.CLEAN, () => {
-  buildLog(Task.CLEAN, 'LIB_PATH: %s', paths.lib);
+  log(Task.CLEAN, 'LIB_PATH: %s', paths.lib);
 
   return del([
     `${paths.lib}/**/*`,
@@ -56,7 +48,7 @@ gulp.task(Task.CLEAN, () => {
 
 gulp.task(Task.TSC, gulp.series(Task.CLEAN, function _tsc(done) {
   const tsProject = ts.createProject('tsconfig.json');
-  buildLog(Task.TSC, 'Typescript configuration:\n%o', tsProject.config);
+  log(Task.TSC, 'Typescript configuration:\n%o', tsProject.config);
 
   return gulp.src([`${paths.src}/**/*.{ts,tsx}`])
     .pipe(tsProject())
