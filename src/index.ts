@@ -1,26 +1,26 @@
-import { 
+import chalk from 'chalk';
+import {
   Application,
   NextFunction,
   Request,
   Response,
   Router,
 } from 'express';
-import chalk from 'chalk';
+import { logger } from 'jege/server';
 
-const tag = chalk.cyan('[express-route-mapper]');
+const log = logger('[express-route-mapper]');
 
 export const createRouter: CreateRouter = function (routes, postAsyncHandlers) {
   const router: Router = Router();
-  console.log(
-    `${tag} Following routes (%s) will be registered with postAsyncHandlers (%s)`,
-    routes.length, 
+  log('Following routes (%s) will be registered with postAsyncHandlers (%s)',
+    routes.length,
     postAsyncHandlers.length
   );
 
   routes.map((route) => {
-    console.debug(`${tag} Route is registered: [%s] ${chalk.green('%s')}`, route.method, route.path);
+    log(`Route is registered: [%s] ${chalk.green('%s')}`, route.method, route.path);
     router[route.method](
-      route.path, 
+      route.path,
       [
         ...(route.beforeware && route.beforeware || []),
         (req: Request, res: Response, next: NextFunction) => {
